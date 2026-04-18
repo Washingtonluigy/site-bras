@@ -7,12 +7,17 @@ import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
+import AdminPanel from './pages/admin/AdminPanel';
 import { Page } from './types';
+import { useSiteSettings } from './hooks/useSiteSettings';
 
-function AppContent() {
+const isAdmin = window.location.pathname === '/admin';
+
+function StoreApp() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [productSlug, setProductSlug] = useState('');
   const [cartOpen, setCartOpen] = useState(false);
+  const { settings } = useSiteSettings();
 
   const handleNavigate = (page: Page, slug?: string) => {
     setCurrentPage(page);
@@ -30,7 +35,7 @@ function AppContent() {
 
       <main>
         {currentPage === 'home' && (
-          <Home onNavigate={handleNavigate} />
+          <Home onNavigate={handleNavigate} settings={settings} />
         )}
         {currentPage === 'products' && (
           <Products onNavigate={handleNavigate} />
@@ -44,18 +49,22 @@ function AppContent() {
         )}
       </main>
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer onNavigate={handleNavigate} settings={settings} />
 
       <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
-      <WhatsAppButton />
+      <WhatsAppButton settings={settings} />
     </div>
   );
 }
 
 export default function App() {
+  if (isAdmin) {
+    return <AdminPanel />;
+  }
+
   return (
     <CartProvider>
-      <AppContent />
+      <StoreApp />
     </CartProvider>
   );
 }

@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { X, MessageCircle } from 'lucide-react';
+import { Settings } from '../hooks/useSiteSettings';
 
-const PHONE = '5566999337454';
-const MESSAGE = encodeURIComponent('Olá! Vim pelo site e gostaria de saber mais sobre os iPhones disponíveis.');
-const WA_URL = `https://wa.me/${PHONE}?text=${MESSAGE}`;
+interface Props {
+  settings: Settings;
+}
 
-export default function WhatsAppButton() {
+export default function WhatsAppButton({ settings }: Props) {
   const [open, setOpen] = useState(false);
+  const phone = settings.whatsapp_number ?? '5566999337454';
+  const message = encodeURIComponent('Olá! Vim pelo site e gostaria de saber mais sobre os iPhones disponíveis.');
+  const waUrl = `https://wa.me/${phone}?text=${message}`;
+  const companyName = settings.footer_company_name ?? 'Braz Cell Tecnologia';
 
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
@@ -18,7 +23,7 @@ export default function WhatsAppButton() {
                 <MessageCircle className="w-5 h-5 text-white" />
               </div>
               <div>
-                <p className="text-white font-semibold text-sm">Braz Cell Tecnologia</p>
+                <p className="text-white font-semibold text-sm">{companyName}</p>
                 <p className="text-white/80 text-xs">Normalmente responde em minutos</p>
               </div>
             </div>
@@ -38,7 +43,7 @@ export default function WhatsAppButton() {
 
           <div className="p-3 bg-white">
             <a
-              href={WA_URL}
+              href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="block w-full bg-[#25D366] hover:bg-[#20b958] text-white text-center font-semibold py-2.5 rounded-xl transition-colors text-sm"

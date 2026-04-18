@@ -2,18 +2,20 @@ import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import { useFeaturedProducts } from '../hooks/useProducts';
 import { Page } from '../types';
+import { Settings } from '../hooks/useSiteSettings';
 import { ArrowRight, Zap } from 'lucide-react';
 
 interface HomeProps {
   onNavigate: (page: Page, slug?: string) => void;
+  settings: Settings;
 }
 
-export default function Home({ onNavigate }: HomeProps) {
+export default function Home({ onNavigate, settings }: HomeProps) {
   const { products, loading } = useFeaturedProducts();
 
   return (
     <div>
-      <Hero onNavigate={onNavigate} />
+      <Hero onNavigate={onNavigate} settings={settings} />
 
       <section className="bg-[#050505] py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

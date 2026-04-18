@@ -98,6 +98,11 @@ export default function ProductCard({ product, onNavigate }: ProductCardProps) {
             Adicionar
           </button>
         </div>
+        {(product.specs as Record<string, string>)?.destaque && (
+          <p className="mt-2.5 text-[#00ff88]/70 text-xs border-t border-[#1a1a1a] pt-2.5">
+            {(product.specs as Record<string, string>).destaque}
+          </p>
+        )}
       </div>
     </div>
   );
