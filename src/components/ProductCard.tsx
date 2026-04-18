@@ -1,4 +1,4 @@
-import { ShoppingCart, Tag, Eye } from 'lucide-react';
+import { ShoppingCart, Eye } from 'lucide-react';
 import { Product, Page } from '../types';
 import { useCart } from '../context/CartContext';
 

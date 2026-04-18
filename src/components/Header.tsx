@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ShoppingCart, Menu, X, Cpu, Phone } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Page } from '../types';
 
