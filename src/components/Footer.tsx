@@ -63,11 +63,11 @@ export default function Footer({ onNavigate }: FooterProps) {
             <ul className="space-y-3">
               <li className="flex items-start gap-2.5">
                 <Phone className="w-4 h-4 text-[#00ff88] mt-0.5 flex-shrink-0" />
-                <span className="text-gray-500 text-sm">(00) 00000-0000</span>
+                <a href="tel:+5566999337454" className="text-gray-500 hover:text-[#00ff88] text-sm transition-colors duration-200">(66) 99933-7454</a>
               </li>
               <li className="flex items-start gap-2.5">
                 <MessageCircle className="w-4 h-4 text-[#00ff88] mt-0.5 flex-shrink-0" />
-                <span className="text-gray-500 text-sm">WhatsApp disponível</span>
+                <a href="https://wa.me/5566999337454" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-[#00ff88] text-sm transition-colors duration-200">WhatsApp disponível</a>
               </li>
               <li className="flex items-start gap-2.5">
                 <Mail className="w-4 h-4 text-[#00ff88] mt-0.5 flex-shrink-0" />
