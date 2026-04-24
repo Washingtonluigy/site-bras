@@ -4,9 +4,10 @@ import { useCart } from '../context/CartContext';
 interface CartDrawerProps {
   open: boolean;
   onClose: () => void;
+  onCheckout: () => void;
 }
 
-export default function CartDrawer({ open, onClose }: CartDrawerProps) {
+export default function CartDrawer({ open, onClose, onCheckout }: CartDrawerProps) {
   const { items, removeFromCart, updateQuantity, totalPrice, totalItems, clearCart } = useCart();
 
   return (
@@ -118,12 +119,15 @@ export default function CartDrawer({ open, onClose }: CartDrawerProps) {
                 {totalPrice.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
               </span>
             </div>
-            <button className="w-full flex items-center justify-center gap-2 py-4 bg-[#00ff88] text-black font-bold text-base rounded-2xl hover:bg-[#00e67a] transition-all duration-200 shadow-[0_0_20px_rgba(0,255,136,0.25)]">
+            <button
+              onClick={onCheckout}
+              className="w-full flex items-center justify-center gap-2 py-4 bg-[#00ff88] text-black font-bold text-base rounded-2xl hover:bg-[#00e67a] transition-all duration-200 shadow-[0_0_20px_rgba(0,255,136,0.25)]"
+            >
               Finalizar compra
               <ArrowRight className="w-5 h-5" />
             </button>
             <p className="text-gray-600 text-xs text-center">
-              Entre em contato via WhatsApp para finalizar
+              PIX ou cartão via Mercado Pago
             </p>
           </div>
         )}

@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import CartDrawer from './components/CartDrawer';
 import WhatsAppButton from './components/WhatsAppButton';
+import CheckoutModal from './components/CheckoutModal';
 import Home from './pages/Home';
 import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
@@ -17,6 +18,7 @@ function StoreApp() {
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [productSlug, setProductSlug] = useState('');
   const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const { settings } = useSiteSettings();
 
   const handleNavigate = (page: Page, slug?: string) => {
@@ -24,6 +26,11 @@ function StoreApp() {
     if (slug) setProductSlug(slug);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  function handleCheckout() {
+    setCartOpen(false);
+    setCheckoutOpen(true);
+  }
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">
@@ -51,7 +58,12 @@ function StoreApp() {
 
       <Footer onNavigate={handleNavigate} settings={settings} />
 
-      <CartDrawer open={cartOpen} onClose={() => setCartOpen(false)} />
+      <CartDrawer
+        open={cartOpen}
+        onClose={() => setCartOpen(false)}
+        onCheckout={handleCheckout}
+      />
+      <CheckoutModal open={checkoutOpen} onClose={() => setCheckoutOpen(false)} />
       <WhatsAppButton settings={settings} />
     </div>
   );
