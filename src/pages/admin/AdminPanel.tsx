@@ -5,9 +5,9 @@ import GeneralTab from './tabs/GeneralTab';
 import CategoriesTab from './tabs/CategoriesTab';
 import ProductsTab from './tabs/ProductsTab';
 import FooterTab from './tabs/FooterTab';
-import { supabase } from '../../lib/supabase';
-
 type Tab = 'general' | 'categories' | 'products' | 'footer';
+
+const ADMIN_PASSWORD = '261520';
 
 export default function AdminPanel() {
   const [authed, setAuthed] = useState(() => sessionStorage.getItem('admin_auth') === '1');
@@ -17,17 +17,11 @@ export default function AdminPanel() {
   const [tab, setTab] = useState<Tab>('general');
   const { settings, loading, saveSettings } = useSiteSettings();
 
-  async function handleLogin(e: React.FormEvent) {
+  function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setError('');
     setChecking(true);
-    const { data } = await supabase
-      .from('site_settings')
-      .select('value')
-      .eq('key', 'admin_password')
-      .maybeSingle();
-    const correct = data?.value ?? 'brazcell2025';
-    if (password === correct) {
+    if (password === ADMIN_PASSWORD) {
       sessionStorage.setItem('admin_auth', '1');
       setAuthed(true);
     } else {
